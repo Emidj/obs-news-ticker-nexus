@@ -14,6 +14,16 @@ Native ticker source for OBS Studio on Windows x64. First stable release, with 1
 
 *Complete ticker in the Light style: Now Playing, weather, custom header and lower Twitch event/message band. Actual renderer output with controlled sample data; not a live event capture.*
 
+### More ticker styles
+
+![Normal ticker styles: News, World, Breaking, Business, Sports, Clean, Map, Red and Light](docs/images/ticker-styles-normal.png)
+
+*Nine complete Normal ticker designs, with Now Playing, clock/weather and scrolling event/news bands.*
+
+![Compact ticker styles: Prime, Glass, Neon, Sport, Magazine, Dark and Ultra](docs/images/ticker-styles-compact.png)
+
+*Seven complete Compact ticker designs, including their music, clock/weather and event sections. These are actual native-renderer previews with controlled sample data, not live broadcast captures. User-editable sample city names are shown as configured.*
+
 ## Install
 
 1. Close OBS Studio.
