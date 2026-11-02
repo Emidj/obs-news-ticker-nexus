@@ -1,0 +1,484 @@
+uniform float4x4 ViewProj;
+uniform texture2d image;
+uniform float opacity;
+uniform float4 glow_color;
+uniform float map_time;
+uniform float map_opacity;
+uniform float map_intensity;
+uniform float map_clean_header;
+uniform float4 map_uv;
+uniform float4 compact_size;
+uniform float4 compact_bg;
+uniform float4 compact_header;
+uniform float compact_mode;
+uniform float4 hype_size;
+uniform float4 hype_bg;
+uniform float4 hype_accent;
+uniform float hype_style;
+uniform float compact_head_width;
+uniform float compact_head_left;
+uniform float compact_reference_header;
+uniform float compact_reference_caption;
+uniform float compact_reference_tail;
+uniform float4 icon_color;
+uniform float icon_mode;
+uniform float finish_mode;
+sampler_state linear_sampler {
+    Filter = Linear;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+struct Vertex {
+    float4 pos : POSITION;
+    float2 uv : TEXCOORD0;
+};
+Vertex VS(Vertex input)
+{
+    Vertex output;
+    output.pos = mul(float4(input.pos.xyz, 1.0), ViewProj);
+    output.uv = input.uv;
+    return output;
+}
+float4 PS(Vertex input) : TARGET
+{
+    // The input is premultiplied; fade RGB and alpha by the same factor.
+    return image.Sample(linear_sampler, input.uv) * opacity;
+}
+float4 PSGlow(Vertex input) : TARGET
+{
+    float2 p = input.uv * 2.0 - 1.0;
+    float falloff = saturate(1.0 - dot(p, p));
+    // Smooth oval light: both opacity and slope reach zero at its boundary.
+    return glow_color * falloff * falloff;
+}
+float4 PSShadow(Vertex input) : TARGET
+{
+    float a=image.Sample(linear_sampler,input.uv).a*opacity;
+    return float4(0,0,0,a);
+}
+float4 PSMap(Vertex input) : TARGET
+{
+    // Only the map area of the original supplied artwork is sampled.
+    float2 uv=map_uv.xy+input.uv*map_uv.zw;
+    float3 original=image.Sample(linear_sampler,uv).rgb;
+    if(map_clean_header>.5){
+        float2 p=input.uv*float2(160,45);
+        float4 box=float4(20,6,138,40);
+        if(p.x>=box.x&&p.x<=box.z&&p.y>=box.y&&p.y<=box.w){
+            float2 q=(p-box.xy)/(box.zw-box.xy);
+            float2 pixel=float2(1.0/1536,1.0/1024);
+            float3 left=image.Sample(linear_sampler,map_uv.xy+float2(box.x,p.y)*pixel).rgb;
+            float3 right=image.Sample(linear_sampler,map_uv.xy+float2(box.z,p.y)*pixel).rgb;
+            float3 top=image.Sample(linear_sampler,map_uv.xy+float2(p.x,box.y)*pixel).rgb;
+            float3 bottom=image.Sample(linear_sampler,map_uv.xy+float2(p.x,box.w)*pixel).rgb;
+            float3 tl=image.Sample(linear_sampler,map_uv.xy+box.xy*pixel).rgb;
+            float3 tr=image.Sample(linear_sampler,map_uv.xy+box.zy*pixel).rgb;
+            float3 bl=image.Sample(linear_sampler,map_uv.xy+box.xw*pixel).rgb;
+            float3 br=image.Sample(linear_sampler,map_uv.xy+box.zw*pixel).rgb;
+            float3 corners=lerp(lerp(tl,tr,q.x),lerp(bl,br,q.x),q.y);
+            original=clamp(lerp(left,right,q.x)+lerp(top,bottom,q.y)-corners,min(min(left,right),min(top,bottom)),max(max(left,right),max(top,bottom)));
+        }
+    }
+    float blue=saturate((original.b-max(original.r,original.g)-.08)*6.0);
+    float edge=smoothstep(0,.15,input.uv.x);
+    float pulse=.82+.10*map_intensity*sin(map_time*.785398);
+    float sweep=exp(-pow((input.uv.x-frac(map_time*.1))/.11,2.0))*.18*map_intensity;
+    float a=blue*edge*map_opacity;
+    return float4(saturate(original*(pulse+sweep))*a,a);
+}
+float4 PSReferenceIcon(Vertex input) : TARGET
+{
+    float3 rgb=image.Sample(linear_sampler,map_uv.xy+input.uv*map_uv.zw).rgb;
+    float lo=min(rgb.r,min(rgb.g,rgb.b)),hi=max(rgb.r,max(rgb.g,rgb.b));
+    float mask=saturate((lo-.05)/.95);
+    if(icon_mode>.5&&icon_mode<1.5)mask=saturate((.95-hi)/.75);
+    if(icon_mode>1.5&&icon_mode<2.5)mask=smoothstep(.20,.45,hi);
+    if(icon_mode>2.5&&icon_mode<3.5)mask=smoothstep(.12,.35,hi-lo);
+    if(icon_mode>3.5)mask=max(smoothstep(.18,.60,lo),smoothstep(.15,.5,rgb.r-rgb.b)*smoothstep(.1,.4,rgb.g-rgb.b));
+    if(icon_mode<1.5)return icon_color*mask;
+    float a=mask*icon_color.a;
+    return float4(rgb*a,a);
+}
+technique Draw {
+    pass {
+        vertex_shader = VS(input);
+        pixel_shader = PS(input);
+    }
+}
+technique Glow {
+    pass {
+        vertex_shader = VS(input);
+        pixel_shader = PSGlow(input);
+    }
+}
+technique Shadow {
+    pass { vertex_shader=VS(input);pixel_shader=PSShadow(input); }
+}
+technique Map {
+    pass { vertex_shader=VS(input);pixel_shader=PSMap(input); }
+}
+technique ReferenceIcon {
+    pass {vertex_shader=VS(input);pixel_shader=PSReferenceIcon(input);}
+}
+float4 PSFinish(Vertex input) : TARGET
+{
+    float2 p=input.uv*compact_size.xy;
+    if(finish_mode>2.5&&finish_mode<3.5){
+        float2 q=input.uv*2-1;
+        float a=compact_bg.a*pow(saturate(1-dot(q,q)),2);
+        return float4(0,0,0,a);
+    }
+    if((finish_mode>3.5&&finish_mode<4.5)||(finish_mode>6.5&&finish_mode<7.5)){
+        float fade=finish_mode>6.5?smoothstep(.02,.98,input.uv.x):exp(-pow((input.uv.x-.73)/.27,2));
+        fade*=.86+.14*(1-input.uv.y);
+        return compact_bg*fade;
+    }
+    if(finish_mode>8.5){
+        float fade=smoothstep(.4,1,input.uv.y);
+        float3 rgb=compact_bg.rgb*(1-.92*fade)+float3(0,.025,.17)*compact_bg.a*fade;
+        return float4(min(rgb,compact_bg.a),compact_bg.a);
+    }
+    if(finish_mode>7.5){
+        float3 tint=lerp(float3(1,1,1),float3(.90,.94,.99),input.uv.y);
+        return float4(compact_bg.rgb*tint,compact_bg.a);
+    }
+    float top=exp(-pow((input.uv.y-.12)/.16,2));
+    float gain=.78+.22*(1-input.uv.y)+top*.12;
+    if(finish_mode>.5&&finish_mode<1.5)gain=.88+.13*(1-input.uv.y)+top*.08;
+    if(finish_mode>1.5)gain=.60+.48*(1-input.uv.y)+top*.16;
+    if(finish_mode>5.5)gain=(.25+.95*exp(-pow((input.uv.x-.5)/.44,2)))*(.78+.22*(1-input.uv.y));
+    float3 rgb=compact_bg.rgb*gain;
+    float grain=(sin(p.x*.73+p.y*1.3)+sin(p.x*1.83-p.y))*.0025;
+    rgb+=grain*compact_bg.a;
+    float bevel=(1-smoothstep(0,1.2,p.y))*.07-(1-smoothstep(0,1.5,compact_size.y-p.y))*.10;
+    rgb+=bevel*compact_bg.a;
+    return float4(min(max(rgb,0),compact_bg.a),compact_bg.a);
+}
+technique Finish {
+    pass {vertex_shader=VS(input);pixel_shader=PSFinish(input);}
+}
+// Signed distance to a rounded trapezoid. The two sloping sides have
+// independent measured endpoints; all dimensions below are reference pixels.
+float card_distance(float2 p,float lt,float rt,float lb,float rb,float y0,float y1,float radius)
+{
+    float v=saturate((p.y-y0)/max(1,y1-y0));
+    float ls=(lb-lt)/max(1,y1-y0),rs=(rb-rt)/max(1,y1-y0);
+    float dx=max((lerp(lt,lb,v)-p.x)/sqrt(1+ls*ls),(p.x-lerp(rt,rb,v))/sqrt(1+rs*rs));
+    float dy=max(y0-p.y,p.y-y1);
+    float2 q=float2(dx,dy)+radius;
+    return length(max(q,0))+min(max(q.x,q.y),0)-radius;
+}
+float coverage(float d){return 1-smoothstep(-.55,.55,d);}
+float4 over(float4 back,float4 front){return front+back*(1-front.a);}
+float4 colored(float3 rgb,float a){return float4(saturate(rgb)*a,a);}
+float4 compact_badge(float2 p)
+{
+    float m=compact_mode;
+    float lt=59,rt=164,lb=39,rb=142,y0=3,y1=66;
+    float ilt=65,irt=156,ilb=44,irb=135,iy0=11,iy1=61;
+    float radius=5;
+    if(m>.5&&m<1.5){lt=32;rt=184;lb=3;rb=157;y0=1;y1=69;ilt=47;irt=176;ilb=16;irb=151;iy0=6;iy1=64;}
+    if(m>1.5&&m<2.5){lt=32;rt=181;lb=3;rb=156;y0=1;y1=69;ilt=43;irt=174;ilb=15;irb=149;iy0=7;iy1=63;}
+    if(m>2.5&&m<3.5){lt=59;rt=174;lb=33;rb=147;y0=1;y1=69;ilt=lt;irt=rt;ilb=lb;irb=rb;iy0=y0;iy1=y1;radius=1;}
+    if(m>3.5&&m<4.5){lt=49;rt=188;lb=18;rb=164;y0=1;y1=69;ilt=59;irt=179;ilb=28;irb=155;iy0=6;iy1=65;}
+    if(m>4.5){lt=41;rt=164;lb=18;rb=139;y0=2;y1=63;ilt=47;irt=157;ilb=25;irb=133;iy0=5;iy1=60;radius=4;}
+    float d=card_distance(p,lt,rt,lb,rb,y0,y1,radius);
+    float di=card_distance(p,ilt,irt,ilb,irb,iy0,iy1,radius);
+    float v=saturate((p.y-iy0)/max(1,iy1-iy0));
+    float u=saturate((p.x-lerp(ilt,ilb,v))/max(1,lerp(irt,irb,v)-lerp(ilt,ilb,v)));
+    float a=compact_header.a;
+    float3 paint=compact_header.rgb/max(.001,a);
+    float3 carrier=float3(.016,.025,.038),rim=float3(.35,.41,.49),light=float3(1,.035,.01);
+    float3 fill=paint*(1.22-.54*v)*(v<.5?1:.86);
+    if(m>.5&&m<1.5){
+        carrier=lerp(float3(.48,.67,.98),float3(.81,.67,.99),v);
+        carrier=lerp(carrier,float3(.09,.40,.85),u*.8);
+        fill=paint*float3(1,.66,.96)*(.96-.13*v)+float3(.10,.015,.03);
+        fill=lerp(fill,float3(.72,.42,.98),pow(1-u,1.3)*v*.94);
+        fill+=float3(.8,.85,1)*(1-smoothstep(.25,.38,v+u*.16))*(1-u*.6)*.28;
+        rim=float3(.63,.82,1);light=float3(.08,.7,1);
+    }
+    if(m>1.5&&m<2.5){
+        carrier=float3(.47,.008,.62)*(1-v*.25);
+        fill=paint*(.20+.69*exp(-pow((v-.06)/.23,2))+.20*exp(-pow((v-.95)/.2,2)));
+        rim=float3(.99,.08,.95);light=lerp(float3(1,.015,.88),float3(.025,.60,1),smoothstep(.70,.95,u));
+    }
+    if(m>2.5&&m<3.5){carrier=paint;fill=paint*(1.02-.035*v);rim=float3(.50,.58,.68);light=float3(.7,.75,.85);}
+    if(m>3.5&&m<4.5){
+        carrier=float3(.55,.005,.79);
+        fill=paint*float3(.8,1,1.04)*(.85+.13*(1-v));
+        fill+=float3(0,0,.13)*(1-u);
+        float band=u+v*.35;
+        fill+=float3(.35,.25,.65)*smoothstep(.08,.12,band)*(1-smoothstep(.25,.30,band))*(1-v*.5)*.4;
+        carrier=lerp(float3(.70,.005,.92),float3(.20,.005,.38),u)*(1-v*.2);
+        rim=float3(.94,.045,1);light=float3(.83,.025,1);
+    }
+    if(m>4.5){
+        carrier=float3(.08,.12,.045);
+        fill=lerp(float3(.018,.025,.031),float3(.16,.20,.08),pow(1-v,3));
+        fill+=paint*.10;
+        fill+=float3(.11,.13,.10)*exp(-pow((v+u*.23-.18)/.13,2));
+        rim=float3(.52,.70,.06);light=float3(.70,.94,.015);
+    }
+    float4 result=float4(0,0,0,0);
+    if(m>1.5&&m<2.5||m>3.5&&m<4.5){
+        float facet=card_distance(p,rt-3,rt+14,rb-2,rb+13,y0+1,y1-1,2);
+        float3 facet_color=m<2.5?float3(.02,.10,.30):float3(.14,.005,.25);
+        facet_color+=(.02+.025*sin(p.x*2.7+p.y*1.9));
+        result=colored(facet_color,coverage(facet)*a*.8);
+    }
+    result=over(result,colored(carrier,coverage(d)*a));
+    result=over(result,colored(fill,coverage(di)*a));
+    // One carrier edge and one inset edge. No second displaced capsule,
+    // generic rectangular inset, or long-body outline crosses this badge.
+    float outside=exp(-abs(d)*1.5)*a;
+    float inset=exp(-abs(di)*1.65)*coverage(d)*a;
+    if(m>2.5&&m<3.5){outside*=.30;inset=0;}
+    float3 inset_color=m<.5?float3(.94,.12,.025):light*.60+float3(.39,.39,.39);
+    if(m>3.5&&m<4.5)inset_color=lerp(float3(.92,.08,1),float3(1,.62,1),pow(1-u,2)*v)*.72;
+    result.rgb+=rim*outside*.66+inset_color*inset;
+    result.a=max(result.a,max(outside*.66,inset));
+    float bloom_gain=m<.5?.10:m<1.5?.16:m<2.5?.34:m<3.5?0:m<4.5?.26:.14;
+    float bloom=exp(-abs(di)/(m>1.5&&m<4.5?6:3.5))*bloom_gain*a;
+    result.rgb+=light*bloom;result.a=max(result.a,bloom);
+    float outside_gain=m<.5?0:m<1.5?.10:m<2.5?.30:m<3.5?0:m<4.5?.22:.12;
+    float outside_glow=exp(-max(d,0)/5)*(1-coverage(d))*outside_gain*a;
+    result.rgb+=light*outside_glow;result.a=max(result.a,outside_glow);
+    if(m<.5){
+        float warm=exp(-pow((p.y-64)/3.2,2))*exp(-pow((p.x-93)/43,2))*.65*a;
+        result.rgb+=float3(1,.52,.08)*warm;result.a=max(result.a,warm);
+    }
+    // Separate leading diagonals, traced at the same inclination as the card.
+    float stripe1=100,stripe2=100;
+    if(m<.5){
+        // Include the original silver edge for the full length of each slash.
+        // The previous shared endpoints clipped it as the diagonals descended.
+        stripe1=card_distance(p,28,45,0,17,5,69,.6);
+        stripe2=card_distance(p,52,63,22,35,5,69,.6);
+    }
+    if(m>2.5&&m<3.5){
+        stripe1=card_distance(p,30,41,0,11,3,69,.6);
+        stripe2=card_distance(p,45,59,14,28,3,69,.6);
+    }
+    if(m>3.5&&m<4.5)stripe1=card_distance(p,34,47,0,13,2,69,.6);
+    if(m>4.5)stripe1=card_distance(p,31,44,0,13,2,63,.6);
+    float3 c1=m>4.5?float3(.68,.91,.015):float3(.97,.012,.035);
+    c1*=1-.30*v;
+    if(m<.5||m>2.5&&m<3.5)c1*=v<.49?1:.72;
+    if(m>4.5)c1*=v<.49?1:.8;
+    float3 c2=m>2.5?float3(.88,.93,.99):c1;
+    result=over(result,colored(c1,coverage(stripe1)*a));
+    result=over(result,colored(c2,coverage(stripe2)*a));
+    float stripe_edge=max(exp(-abs(stripe1)*1.8),exp(-abs(stripe2)*1.8))*.36*a;
+    result.rgb+=float3(.75,.80,.72)*stripe_edge;result.a=max(result.a,stripe_edge);
+    if(m>2.5&&m<3.5){
+        float red=card_distance(p,176,194,149,166,1,69,.5);
+        result=over(result,colored(float3(.92,.008,.07)*(1-.35*v)*(v<.49?1:.78),coverage(red)*a));
+    }
+    result.rgb=min(max(result.rgb,0),result.a);
+    if(compact_reference_header>.5){
+        // Keep the actual artwork's material, reflections and painted borders.
+        // Only the old caption rectangle is reconstructed, from clean pixels
+        // immediately to its left/right at the same Y. It never samples text.
+        result.a=max(result.a,max(coverage(d-1.3),max(coverage(stripe1-1.3),coverage(stripe2-1.3)))*a);
+        float4 caption=float4(70,21,127,50);
+        if(m>.5&&m<1.5)caption=float4(52,20,150,49);
+        if(m>1.5&&m<2.5)caption=float4(60,20,128,50);
+        if(m>2.5&&m<3.5)caption=float4(58,18,153,49);
+        if(m>3.5&&m<4.5)caption=float4(64,21,155,52);
+        if(m>4.5)caption=float4(55,15,120,48);
+        float2 uv=map_uv.xy+float2(p.x/1536,p.y/1024);
+        float3 material=image.Sample(linear_sampler,uv).rgb;
+        if(compact_reference_caption<.5&&p.x>=caption.x&&p.x<=caption.z&&p.y>=caption.y&&p.y<=caption.w){
+            float uu=saturate((p.x-caption.x)/(caption.z-caption.x)),vv=saturate((p.y-caption.y)/(caption.w-caption.y));
+            float3 left=image.Sample(linear_sampler,map_uv.xy+float2(caption.x/1536,p.y/1024)).rgb;
+            float3 right=image.Sample(linear_sampler,map_uv.xy+float2(caption.z/1536,p.y/1024)).rgb;
+            float3 top=image.Sample(linear_sampler,map_uv.xy+float2(p.x/1536,caption.y/1024)).rgb;
+            float3 bottom=image.Sample(linear_sampler,map_uv.xy+float2(p.x/1536,caption.w/1024)).rgb;
+            float3 tl=image.Sample(linear_sampler,map_uv.xy+float2(caption.x/1536,caption.y/1024)).rgb;
+            float3 tr=image.Sample(linear_sampler,map_uv.xy+float2(caption.z/1536,caption.y/1024)).rgb;
+            float3 bl=image.Sample(linear_sampler,map_uv.xy+float2(caption.x/1536,caption.w/1024)).rgb;
+            float3 br=image.Sample(linear_sampler,map_uv.xy+float2(caption.z/1536,caption.w/1024)).rgb;
+            // A Coons patch matches all four clean boundaries. Replacing only
+            // bright ink left a dark silhouette; replacing a flat rectangle
+            // left seams. This removes the entire old caption and its shadow.
+            float3 clean=lerp(left,right,uu)+lerp(top,bottom,vv)-lerp(lerp(tl,tr,uu),lerp(bl,br,uu),vv);
+            // Do not invent a brighter/darker patch than any clean boundary,
+            // especially on Sport's almost-white plate.
+            clean=clamp(clean,min(min(left,right),min(top,bottom)),max(max(left,right),max(top,bottom)));
+            material=saturate(clean);
+        }
+        result.rgb=material*result.a;
+    }
+    return result;
+}
+float4 PSCompact(Vertex input) : TARGET
+{
+    float2 p=input.uv*compact_size.xy;
+    float source_width=map_uv.z*1536,source_height=map_uv.w*1024;
+    float2 scale=compact_size.xy/float2(source_width,source_height);
+    float2 ref=p/scale;
+    float m=compact_mode;
+    float badge_end=m<.5?165:m<1.5?185:m<2.5?182:m<3.5?195:m<4.5?190:166;
+    float start=m>4.5?140:m>2.5&&m<3.5?184:m<.5?28:0;
+    float radius=16;
+    float2 half=float2((compact_size.x-start*scale.x)*.5,compact_size.y*.5);
+    float2 q=abs(p-float2(start*scale.x+half.x,half.y))-(half-radius-2);
+    float d=length(max(q,0))+min(max(q.x,q.y),0)-radius;
+    if(m>2.5&&m<3.5||m>4.5){
+        d=card_distance(ref,start+24,source_width-17,start,source_width-37,2,source_height-2,m>4.5?5:2)*min(scale.x,scale.y);
+    }
+    float alpha=coverage(d)*compact_bg.a;
+    float3 base=compact_bg.rgb/max(.001,compact_bg.a)*(.94+.06*(1-input.uv.y));
+    if(m>2.5&&m<3.5)base=compact_bg.rgb/max(.001,compact_bg.a)*float3(1.05,1.03,1.01);
+    if(m>4.5)base+=.007*sin((p.x+p.y)*1.8);
+    float4 result=colored(base,alpha);
+    float3 accent=float3(.32,.41,.5);
+    if(m>.5)accent=float3(.04,.32,1);
+    if(m>1.5)accent=lerp(float3(.06,.60,1),float3(.84,.025,1),.5+.5*sin(input.uv.x*24));
+    if(m>2.5)accent=float3(.82,.87,.94);
+    if(m>3.5)accent=float3(.88,.025,1);
+    if(m>4.5)accent=float3(.30,.40,.44);
+    float edge=exp(-abs(d)*1.6),halo=exp(-abs(d)*.42)*.18;
+    float3 edge_color=accent;
+    if(m>.5&&m<2.5||m>3.5&&m<4.5){
+        float row=input.uv.y<.5?.5/1024:map_uv.w-.5/1024;
+        float3 original=image.Sample(linear_sampler,map_uv.xy+float2(input.uv.x*map_uv.z,row)).rgb;
+        if(max(original.r,max(original.g,original.b))>.15)edge_color=saturate(original*1.4);
+    }
+    result.rgb+=(edge_color*edge*.75+accent*halo)*compact_bg.a;
+    result.a=max(result.a,max(edge*.75,halo)*compact_bg.a);
+    if((m>2.5&&m<3.5||m>4.5)&&!(m>4.5&&compact_reference_tail>.5)){
+        float right=source_width-17-input.uv.y*20;
+        float tail_distance=card_distance(ref,source_width-17,source_width-5,source_width-37,source_width-25,2,source_height-2,m>4.5?5:2);
+        float tail=coverage(tail_distance);
+        float3 tail_color=m>4.5?float3(.66,.90,.01):float3(.95,.01,.08);
+        result=over(result,colored(tail_color*(1-.25*input.uv.y),tail*compact_bg.a));
+        if(m>4.5){
+            float b=exp(-pow((ref.x-right-7)/13,2))*smoothstep(0,5,ref.y)*smoothstep(0,5,source_height-ref.y)*.38*compact_bg.a;
+            result.rgb+=tail_color*b;result.a=max(result.a,b);
+            float gleam=exp(-abs(tail_distance)*1.6)*exp(-pow((ref.y-5)/9,2))*.7*compact_bg.a;
+            result.rgb+=float3(1,1,.65)*gleam;result.a=max(result.a,gleam);
+        }
+    }
+    if(m>4.5){
+        float split=ref.x-(685+(1-input.uv.y)*18);
+        float gap=1-smoothstep(4,6,abs(split));result*=1-gap;
+        float e=exp(-abs(abs(split)-7)*1.6)*coverage(d)*compact_bg.a;
+        result.rgb+=float3(.60,.80,.015)*e;result.a=max(result.a,e);
+    }
+    if(compact_reference_tail>.5&&m>2.5&&m<3.5&&ref.x>source_width-20&&result.a>compact_bg.a*.08){
+        // The final twenty reference pixels contain only the painted tail and
+        // glow, never event text. Preserve its curved highlight and soft light.
+        float3 tail_material=image.Sample(linear_sampler,map_uv.xy+input.uv*map_uv.zw).rgb*compact_bg.a;
+        result.a=max(result.a,max(tail_material.r,max(tail_material.g,tail_material.b)));
+        result.rgb=tail_material;
+    }
+    if(compact_reference_tail>.5&&m>.5&&m<2.5&&ref.x>source_width-260){
+        // Original blue/violet border and light. The interior uses only clean
+        // top/bottom margins; event letters/icons in the middle are excluded.
+        float3 original=image.Sample(linear_sampler,map_uv.xy+input.uv*map_uv.zw).rgb;
+        float3 top=image.Sample(linear_sampler,map_uv.xy+float2(input.uv.x*map_uv.z,10.0/1024.0)).rgb;
+        float3 bottom=image.Sample(linear_sampler,map_uv.xy+float2(input.uv.x*map_uv.z,(source_height-10)/1024)).rgb;
+        float3 center=compact_bg.rgb/max(.001,compact_bg.a)*.30;
+        float3 material=center+max(top-center,0)*exp(-pow((ref.y-10)/14,2))+max(bottom-center,0)*exp(-pow((ref.y-source_height+10)/14,2));
+        if(ref.y<10||ref.y>source_height-10||ref.x>source_width-20)material=original;
+        material=saturate(material)*compact_bg.a;
+        float matte=max(coverage(d)*compact_bg.a,max(material.r,max(material.g,material.b)));
+        float blend=smoothstep(source_width-260,source_width-220,ref.x);
+        result=lerp(result,float4(material,matte),blend);
+    }
+    if(compact_reference_tail>.5&&m>4.5&&ref.x>source_width-120){
+        // A single reference tail replaces the procedural tip and its overlay.
+        // The fade crosses the old raid caption: retain only saturated green
+        // paint there, replacing neutral text/shadow with the dark material.
+        float3 material=image.Sample(linear_sampler,map_uv.xy+input.uv*map_uv.zw).rgb*compact_bg.a;
+        if(ref.x<source_width-30&&ref.y>15&&ref.y<48&&!(material.g-material.b>.06*compact_bg.a&&material.g-material.b>material.g*.4&&material.g>material.r*.9))material=saturate(base)*compact_bg.a;
+        float outer=card_distance(ref,source_width-50,source_width-1,source_width-70,source_width-22,0,source_height-1,5);
+        float matte=max(max(coverage(d),coverage(outer))*compact_bg.a,max(material.r,max(material.g,material.b)));
+        result=lerp(result,float4(material,matte),smoothstep(source_width-120,source_width-80,ref.x));
+    }
+    // An opaque carrier occludes the long panel, including its border and glow.
+    // This composition order makes a body contour inside the label impossible.
+    float4 badge=compact_badge(ref);
+    if(m<2.5||m>3.5&&m<4.5){
+        float right=m<.5?lerp(164,142,saturate((ref.y-3)/63)):m<1.5?lerp(184,157,saturate((ref.y-1)/68)):m<2.5?lerp(181,156,saturate((ref.y-1)/68)):lerp(188,164,saturate((ref.y-1)/68));
+        if(ref.y>3&&ref.y<67)result*=smoothstep(right-1,right+1,ref.x);
+    }
+    result=over(result,badge);
+    result.rgb=min(max(result.rgb,0),result.a);
+    return result;
+}
+technique Compact {
+    pass { vertex_shader=VS(input);pixel_shader=PSCompact(input); }
+}
+float4 PSPanel(Vertex input) : TARGET
+{
+    float2 halfsize=compact_size.xy*.5;
+    float2 q=abs(input.uv*compact_size.xy-halfsize)-(halfsize-4);
+    float distance=length(max(q,0))+min(max(q.x,q.y),0)-4;
+    float4 result=compact_bg*(1.02-.04*input.uv.y)*(1-smoothstep(-.5,.5,distance));
+    result.rgb=min(result.rgb,result.a);
+    return result;
+}
+technique Panel {
+    pass {vertex_shader=VS(input);pixel_shader=PSPanel(input);}
+}
+
+float4 PSTextFade(Vertex input) : TARGET
+{
+    float4 color=image.Sample(linear_sampler,input.uv);
+    return float4(color.rgb*color.a,color.a)*opacity;
+}
+technique TextFade {
+    pass {vertex_shader=VS(input);pixel_shader=PSTextFade(input);}
+}
+
+// One shared plate for all Hype styles. No baked lettering or duplicate contours.
+float4 PSHypePlate(Vertex input) : TARGET
+{
+ float2 p=input.uv*hype_size.xy;float w=hype_size.x,h=hype_size.y,badge=w*.265;
+ float mode=hype_style,v=input.uv.y,cut=min(12,h*.32);
+ bool glass=mode==12||mode==13||mode==15;
+ bool slant=mode==4||mode==6||mode==9||mode==14||mode==16;
+ float r=glass?4:mode==2?2:0;
+ float d=card_distance(p,slant?cut:0,w,0,w-cut,1,h-1,r);
+ float a=coverage(d)*hype_bg.a;
+ float3 paint=hype_bg.rgb/max(.001,hype_bg.a),accent=hype_accent.rgb/max(.001,hype_accent.a);
+ float3 base=paint*(1.15-.35*v);
+ if(mode==12)base=lerp(paint,float3(.015,.12,.42),input.uv.x*.7)+float3(.015,.02,.03)*(1-v);
+ if(mode==13||mode==15)base=paint*(.8+.25*(1-v));
+ if(mode==16)base+=.018*sin((p.x+p.y)*1.2);
+ float4 plate=colored(base,a);
+ if(glass){
+  float edge=exp(-abs(d)*1.6),halo=exp(-abs(d)*.6)*.2;
+  float3 light=mode==12?lerp(float3(.65,.25,.95),float3(.02,.65,1),input.uv.x):mode==13?lerp(float3(1,.02,.8),float3(.02,.55,1),input.uv.x):float3(.85,.02,1);
+  float e=(edge*.8+halo)*hype_bg.a;plate.rgb+=light*e;plate.a=max(plate.a,e);
+ }
+ float left=slant?cut:0;
+ if(mode>=11){left=mode==14?cut*.65:cut*.9;}
+ float db=card_distance(p,left,badge,0,badge-cut,2,h-2,glass?3:1);
+ float3 fill=accent*(1.22-.55*v);
+ if(mode==12)fill=lerp(float3(.65,.28,.9),accent,saturate(p.x/max(1,badge)))+float3(.1,.1,.1)*(1-v);
+ if(mode==13)fill=lerp(float3(.85,.01,.7),float3(.18,.01,.45),v);
+ if(mode==15)fill=lerp(float3(.7,.02,1),float3(.27,.01,.5),v);
+ if(mode==16)fill=lerp(float3(.20,.25,.02),float3(.015,.025,.02),v);
+ if(mode==2||mode==14)fill=lerp(float3(1,1,1),accent,v*.55);
+ float ba=coverage(db)*hype_accent.a;
+ float4 badgePlate=colored(fill,ba);
+ float bevel=exp(-abs(db)*1.8)*hype_accent.a;
+ float3 rim=mode==16?accent:mode==12?float3(.4,.85,1):mode==13||mode==15?float3(1,.2,1):accent;
+ badgePlate.rgb+=rim*bevel*.5;badgePlate.a=max(badgePlate.a,bevel*.5);
+ plate=over(plate,badgePlate);
+ // The compact badges share the original styles' slanted accent strips.
+ if(mode>=11){
+  float ds=card_distance(p,cut*.35,cut*.65,0,cut*.3,1,h-1,0);
+  float sa=coverage(ds)*hype_accent.a;
+  float3 strip=mode==14?float3(.9,.015,.05):mode==16?accent:mode==11?float3(.95,.015,.015):accent;
+  plate=over(plate,colored(strip,sa));
+ }
+ float top=exp(-abs(p.y-1)*1.8)*coverage(d)*hype_bg.a*.35;
+ plate.rgb+=accent*top;plate.a=max(plate.a,top);
+ plate.rgb=min(max(plate.rgb,0),plate.a);return plate;
+}
+technique HypePlate {pass {vertex_shader=VS(input);pixel_shader=PSHypePlate(input);}}

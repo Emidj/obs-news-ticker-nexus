@@ -1,0 +1,261 @@
+{
+  "Ruta fuera de OBS.": [
+    "Ruta fuera de OBS.",
+    "Path outside OBS.",
+    "Percorso esterno a OBS.",
+    "Chemin hors d’OBS.",
+    "Pfad außerhalb von OBS."
+  ],
+  "No se admiten enlaces de directorios.": [
+    "No se admiten enlaces de directorios.",
+    "Directory links are not allowed.",
+    "Collegamenti a cartelle non consentiti.",
+    "Les liens de dossiers ne sont pas autorisés.",
+    "Verzeichnisverknüpfungen sind nicht zulässig."
+  ],
+  "No se admiten enlaces de archivos.": [
+    "No se admiten enlaces de archivos.",
+    "File links are not allowed.",
+    "Collegamenti a file non consentiti.",
+    "Les liens de fichiers ne sont pas autorisés.",
+    "Dateiverknüpfungen sind nicht zulässig."
+  ],
+  "Falta un recurso del paquete.": [
+    "Falta un recurso del paquete.",
+    "A package resource is missing.",
+    "Manca una risorsa del pacchetto.",
+    "Une ressource du paquet manque.",
+    "Eine Paketressource fehlt."
+  ],
+  "Manifiesto demasiado grande.": [
+    "Manifiesto demasiado grande.",
+    "Manifest too large.",
+    "Manifesto troppo grande.",
+    "Manifeste trop volumineux.",
+    "Manifest zu groß."
+  ],
+  "Manifiesto inválido.": [
+    "Manifiesto inválido.",
+    "Invalid manifest.",
+    "Manifesto non valido.",
+    "Manifeste invalide.",
+    "Ungültiges Manifest."
+  ],
+  "Versión inválida.": [
+    "Versión inválida.",
+    "Invalid version.",
+    "Versione non valida.",
+    "Version invalide.",
+    "Ungültige Version."
+  ],
+  "Contrato de Twitch Core desconocido o incompatible.": [
+    "Contrato de Twitch Core desconocido o incompatible.",
+    "Unknown or incompatible Twitch Core contract.",
+    "Contratto Twitch Core sconosciuto o incompatibile.",
+    "Contrat Twitch Core inconnu ou incompatible.",
+    "Unbekannter oder inkompatibler Twitch-Core-Vertrag."
+  ],
+  "Contrato de consumidor inválido.": [
+    "Contrato de consumidor inválido.",
+    "Invalid consumer contract.",
+    "Contratto del consumatore non valido.",
+    "Contrat du consommateur invalide.",
+    "Ungültiger Verbrauchervertrag."
+  ],
+  "Contrato inválido.": [
+    "Contrato inválido.",
+    "Invalid contract.",
+    "Contratto non valido.",
+    "Contrat invalide.",
+    "Ungültiger Vertrag."
+  ],
+  "Contrato ilegible.": [
+    "Contrato ilegible.",
+    "Unreadable contract.",
+    "Contratto illeggibile.",
+    "Contrat illisible.",
+    "Vertrag nicht lesbar."
+  ],
+  "Core incompatible con ": [
+    "Core incompatible con ",
+    "Core incompatible with ",
+    "Core incompatibile con ",
+    "Core incompatible avec ",
+    "Core inkompatibel mit "
+  ],
+  ". No se ha actualizado.": [
+    ". No se ha actualizado.",
+    ". It was not updated.",
+    ". Non è stato aggiornato.",
+    ". Il n’a pas été mis à jour.",
+    ". Es wurde nicht aktualisiert."
+  ],
+  "Cierra OBS antes de instalar o desinstalar.": [
+    "Cierra OBS antes de instalar o desinstalar.",
+    "Close OBS before installing or uninstalling.",
+    "Chiudi OBS prima di installare o disinstallare.",
+    "Fermez OBS avant l’installation ou la désinstallation.",
+    "OBS vor der Installation oder Deinstallation schließen."
+  ],
+  "Selecciona la raíz de OBS que contiene bin/64bit/obs64.exe.": [
+    "Selecciona la raíz de OBS que contiene bin/64bit/obs64.exe.",
+    "Select the OBS folder containing bin/64bit/obs64.exe.",
+    "Seleziona la cartella OBS che contiene bin/64bit/obs64.exe.",
+    "Sélectionnez le dossier OBS contenant bin/64bit/obs64.exe.",
+    "OBS-Ordner mit bin/64bit/obs64.exe auswählen."
+  ],
+  "Se necesita OBS 32.x de Windows x64.": [
+    "Se necesita OBS 32.x de Windows x64.",
+    "OBS 32.x for Windows x64 is required.",
+    "È richiesto OBS 32.x per Windows x64.",
+    "OBS 32.x pour Windows x64 est requis.",
+    "OBS 32.x für Windows x64 erforderlich."
+  ],
+  "Ejecutable OBS inválido.": [
+    "Ejecutable OBS inválido.",
+    "Invalid OBS executable.",
+    "Eseguibile OBS non valido.",
+    "Exécutable OBS invalide.",
+    "Ungültige OBS-Programmdatei."
+  ],
+  "OBS debe ser x64.": [
+    "OBS debe ser x64.",
+    "OBS must be x64.",
+    "OBS deve essere x64.",
+    "OBS doit être en x64.",
+    "OBS muss x64 sein."
+  ],
+  "Existe una versión posterior o un manifiesto inválido.": [
+    "Existe una versión posterior o un manifiesto inválido.",
+    "A newer version or an invalid manifest exists.",
+    "Esiste una versione più recente o un manifesto non valido.",
+    "Une version plus récente ou un manifeste invalide existe.",
+    "Eine neuere Version oder ein ungültiges Manifest ist vorhanden."
+  ],
+  "Registro compartido inválido.": [
+    "Registro compartido inválido.",
+    "Invalid shared registry.",
+    "Registro condiviso non valido.",
+    "Registre partagé invalide.",
+    "Ungültiges gemeinsames Register."
+  ],
+  "Paquete dañado.": [
+    "Paquete dañado.",
+    "Damaged package.",
+    "Pacchetto danneggiato.",
+    "Paquet endommagé.",
+    "Beschädigtes Paket."
+  ],
+  "No se puede comprobar la compatibilidad de ": [
+    "No se puede comprobar la compatibilidad de ",
+    "Cannot verify compatibility of ",
+    "Impossibile verificare la compatibilità di ",
+    "Impossible de vérifier la compatibilité de ",
+    "Kompatibilität kann nicht geprüft werden für "
+  ],
+  ". Actualízalo primero.": [
+    ". Actualízalo primero.",
+    ". Update it first.",
+    ". Aggiornalo prima.",
+    ". Mettez-le à jour d’abord.",
+    ". Zuerst aktualisieren."
+  ],
+  "Falta el contrato de ": [
+    "Falta el contrato de ",
+    "Missing contract for ",
+    "Manca il contratto di ",
+    "Contrat manquant pour ",
+    "Fehlender Vertrag für "
+  ],
+  "El Core compartido cambió fuera del instalador. Se conserva.": [
+    "El Core compartido cambió fuera del instalador. Se conserva.",
+    "Shared Core was changed outside the installer. It is preserved.",
+    "Il Core condiviso è stato modificato fuori dall’installazione. Viene conservato.",
+    "Le Core partagé a été modifié hors de l’installateur. Il est conservé.",
+    "Der gemeinsame Core wurde außerhalb des Installers geändert. Er bleibt erhalten."
+  ],
+  "Misma versión de Core con contenido diferente. Se conserva.": [
+    "Misma versión de Core con contenido diferente. Se conserva.",
+    "Same Core version with different content. It is preserved.",
+    "Stessa versione Core con contenuto diverso. Viene conservata.",
+    "Même version du Core avec un contenu différent. Elle est conservée.",
+    "Gleiche Core-Version mit anderem Inhalt. Sie bleibt erhalten."
+  ],
+  "La carpeta de prueba debe ser nueva.": [
+    "La carpeta de prueba debe ser nueva.",
+    "The test folder must be new.",
+    "La cartella di prova deve essere nuova.",
+    "Le dossier de test doit être nouveau.",
+    "Der Testordner muss neu sein."
+  ],
+  "OBS 32.x · Windows x64 · Twitch Core Shared 1.3.1 incluido\nCierra OBS. Se conservarán tus escenas, credenciales e historial.": [
+    "OBS 32.x · Windows x64 · Twitch Core Shared 1.3.1 incluido\nCierra OBS. Se conservarán tus escenas, credenciales e historial.",
+    "OBS 32.x · Windows x64 · Twitch Core Shared 1.3.1 included\nClose OBS. Your scenes, credentials and history will be preserved.",
+    "OBS 32.x · Windows x64 · Twitch Core Shared 1.3.1 incluso\nChiudi OBS. Scene, credenziali e cronologia saranno conservate.",
+    "OBS 32.x · Windows x64 · Twitch Core Shared 1.3.1 inclus\nFermez OBS. Vos scènes, identifiants et historique seront conservés.",
+    "OBS 32.x · Windows x64 · Twitch Core Shared 1.3.1 enthalten\nOBS schließen. Szenen, Zugangsdaten und Verlauf bleiben erhalten."
+  ],
+  "Carpeta…": [
+    "Carpeta…",
+    "Folder…",
+    "Cartella…",
+    "Dossier…",
+    "Ordner…"
+  ],
+  "Instalar / actualizar": [
+    "Instalar / actualizar",
+    "Install / update",
+    "Installa / aggiorna",
+    "Installer / mettre à jour",
+    "Installieren / aktualisieren"
+  ],
+  "Desinstalar": [
+    "Desinstalar",
+    "Uninstall",
+    "Disinstalla",
+    "Désinstaller",
+    "Deinstallieren"
+  ],
+  "Operación completada. Configuración conservada.": [
+    "Operación completada. Configuración conservada.",
+    "Operation completed. Settings preserved.",
+    "Operazione completata. Impostazioni conservate.",
+    "Opération terminée. Réglages conservés.",
+    "Vorgang abgeschlossen. Einstellungen bleiben erhalten."
+  ],
+  "Idioma": [
+    "Idioma",
+    "Language",
+    "Lingua",
+    "Langue",
+    "Sprache"
+  ],
+  "Core anterior no identificado; se conserva.": [
+    "Core anterior no identificado; se conserva.",
+    "Previous Core is unidentified; it is preserved.",
+    "Core precedente non identificato; viene conservato.",
+    "Ancien Core non identifié ; il est conservé.",
+    "Vorheriger Core nicht erkannt; er bleibt erhalten."
+  ],
+  "El plugin fue sustituido. Se conserva.": [
+    "El plugin fue sustituido. Se conserva.",
+    "The plugin was replaced. It is preserved.",
+    "Il plugin è stato sostituito. Viene conservato.",
+    "Le plugin a été remplacé. Il est conservé.",
+    "Das Plugin wurde ersetzt. Es bleibt erhalten."
+  ],
+  "17 estilos · Música · Twitch · World Weather\nBreaking News de Hype Train con ancho y altura ajustables.\nNow Playing automático requiere Playing NEXUS instalado.": [
+    "17 estilos · Música · Twitch · World Weather\nBreaking News de Hype Train con ancho y altura ajustables.\nNow Playing automático requiere Playing NEXUS instalado.",
+    "17 styles · Music · Twitch · World Weather\nHype Train breaking news with adjustable width and height.\nAutomatic Now Playing requires Playing NEXUS.",
+    "17 stili · Musica · Twitch · World Weather\nBreaking News Hype Train con larghezza e altezza regolabili.\nNow Playing automatico richiede Playing NEXUS.",
+    "17 styles · Musique · Twitch · World Weather\nBreaking News Hype Train : largeur et hauteur réglables.\nNow Playing automatique nécessite Playing NEXUS.",
+    "17 Stile · Musik · Twitch · World Weather\nHype-Train-Breaking-News mit einstellbarer Breite und Höhe.\nAutomatisches Now Playing erfordert Playing NEXUS."
+  ],
+  "Carpeta de OBS Studio": [
+    "Carpeta de OBS Studio",
+    "OBS Studio folder",
+    "Cartella OBS Studio",
+    "Dossier OBS Studio",
+    "OBS-Studio-Ordner"
+  ]
+}

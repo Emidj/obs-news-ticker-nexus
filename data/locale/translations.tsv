@@ -1,0 +1,137 @@
+Stage|Orologio locale, OBS Playing automatico o JSON, eventi Twitch Core e meteo Open-Meteo.|Horloge locale, OBS Playing automatique ou JSON, événements Twitch Core et météo Open-Meteo.|Lokale Uhr, automatisches OBS Playing oder JSON, Twitch-Core-Ereignisse und Open-Meteo-Wetter.
+UpperMode|Contenuto banda superiore|Contenu de la bande supérieure|Inhalt des oberen Bands
+UpperManual|Testo manuale|Texte manuel|Manueller Text
+UpperJson|Now Playing — file JSON locale|Now Playing — fichier JSON local|Now Playing — lokale JSON-Datei
+NowPath|File Now Playing (.json)|Fichier Now Playing (.json)|Now-Playing-Datei (.json)
+NowMaxAge|Scadenza dati (secondi)|Expiration des données (secondes)|Datenablauf (Sekunden)
+NowFallback|Mostra testo manuale quando la riproduzione valida non è disponibile|Afficher le texte manuel si aucune lecture valide n’est disponible|Manuellen Text anzeigen, wenn keine gültige Wiedergabe verfügbar ist
+NowDisabled|Now Playing: ingresso esterno disattivato|Now Playing : entrée externe désactivée|Now Playing: externer Eingang deaktiviert
+NowWaiting|Now Playing: in attesa di dati da un emittente compatibile|Now Playing : en attente de données d’un émetteur compatible|Now Playing: wartet auf Daten eines kompatiblen Senders
+NowPlaying|Now Playing: in riproduzione, come segnalato dal fornitore|Now Playing : lecture en cours, selon le fournisseur|Now Playing: Wiedergabe läuft, laut Anbieter
+NowPaused|Now Playing: in pausa|Now Playing : en pause|Now Playing: pausiert
+NowStopped|Now Playing: arrestato|Now Playing : arrêté|Now Playing: gestoppt
+NowMissing|Now Playing: file non trovato|Now Playing : fichier introuvable|Now Playing: Datei nicht gefunden
+NowInvalid|Now Playing: JSON, schema o dati non validi|Now Playing : JSON, schéma ou données invalides|Now Playing: ungültiges JSON, Schema oder Daten
+NowStale|Now Playing: dati scaduti|Now Playing : données expirées|Now Playing: Daten abgelaufen
+NowBadPath|Now Playing: è richiesto un percorso locale assoluto|Now Playing : un chemin local absolu est requis|Now Playing: absoluter lokaler Dateipfad erforderlich
+NowIoError|Now Playing: impossibile leggere il file|Now Playing : lecture du fichier impossible|Now Playing: Datei konnte nicht gelesen werden
+NowFuture|Now Playing: data e ora dei dati oltre 5 secondi nel futuro|Now Playing : horodatage des données en avance de plus de 5 secondes|Now Playing: Datenzeitstempel liegt über 5 Sekunden in der Zukunft
+ClockEnabled|Mostra orologio locale (fuso orario Windows)|Afficher l’horloge locale (fuseau horaire Windows)|Lokale Uhr anzeigen (Windows-Zeitzone)
+ClockFormat|Formato orologio|Format de l’horloge|Uhrzeitformat
+Clock24|24 ore|24 heures|24 Stunden
+Clock12|12 ore (AM/PM)|12 heures (AM/PM)|12 Stunden (AM/PM)
+ClockSeconds|Mostra secondi|Afficher les secondes|Sekunden anzeigen
+Style|Stile visivo|Style visuel|Darstellungsstil
+Motion|Movimento banda notizie inferiore|Mouvement de la bande d’actualités inférieure|Bewegung des unteren Nachrichtenbands
+MotionStatic|Statico|Statique|Statisch
+MotionScroll|Scorrimento continuo verso sinistra|Défilement continu vers la gauche|Kontinuierliches Scrollen nach links
+MotionBlocks|Blocchi dinamici|Blocs dynamiques|Dynamische Blöcke
+MotionAlternate|Dissolvenza dell’intera banda|Fondu de toute la bande|Überblendung des gesamten Bands
+MessageHold|Durata banda inferiore (ms)|Durée d’affichage de la bande inférieure (ms)|Anzeigedauer des unteren Bands (ms)
+MessageFade|Durata dissolvenza (ms)|Durée du fondu (ms)|Überblenddauer (ms)
+Message2|Messaggio personalizzato 2|Message personnalisé 2|Benutzerdefinierte Nachricht 2
+Message3|Messaggio personalizzato 3|Message personnalisé 3|Benutzerdefinierte Nachricht 3
+Message4|Messaggio personalizzato 4|Message personnalisé 4|Benutzerdefinierte Nachricht 4
+Message5|Messaggio personalizzato 5|Message personnalisé 5|Benutzerdefinierte Nachricht 5
+SequenceInfo|Notizie e messaggi sono uniti con •. Solo Blocchi dinamici mostra elementi separati. Now Playing resta fisso.|Actualités et messages sont séparés par •. Seul le mode Blocs dynamiques affiche les éléments séparément. Now Playing reste fixe.|Nachrichten und Meldungen werden mit • verbunden. Nur Dynamische Blöcke zeigt einzelne Einträge. Now Playing bleibt fest.
+BlockTransition|Durata ingresso / uscita (ms)|Durée d’entrée / sortie (ms)|Ein- / Ausblenddauer (ms)
+BlockHold|Durata del blocco (ms)|Durée d’affichage du bloc (ms)|Block-Anzeigedauer (ms)
+BlockPause|Pausa tra blocchi (ms)|Pause entre les blocs (ms)|Pause zwischen Blöcken (ms)
+ScrollSpeed|Velocità scorrimento (px/s)|Vitesse de défilement (px/s)|Scrollgeschwindigkeit (px/s)
+ScrollGap|Spazio tra ripetizioni (px)|Espace entre les répétitions (px)|Abstand zwischen Wiederholungen (px)
+StyleBasic|Base (layout precedente)|Basique (ancienne disposition)|Einfach (vorheriges Layout)
+StyleNews|News Channel — design di riferimento|News Channel — modèle de référence|News Channel — Referenzdesign
+ApplyPalette|Applica colori dello stile (sostituisce quelli attuali)|Appliquer les couleurs du style (remplace les couleurs actuelles)|Stilfarben anwenden (ersetzt aktuelle Farben)
+HeaderSubtitle|Sottotitolo intestazione|Sous-titre de l’en-tête|Untertitel der Kopfzeile
+UpperLabel|Etichetta banda superiore|Libellé de la bande supérieure|Beschriftung des oberen Bands
+LowerLabel|Etichetta banda inferiore|Libellé de la bande inférieure|Beschriftung des unteren Bands
+Width|Larghezza (px)|Largeur (px)|Breite (px)
+UpperHeight|Altezza banda superiore (px)|Hauteur de la bande supérieure (px)|Höhe des oberen Bands (px)
+LowerHeight|Altezza banda inferiore (px)|Hauteur de la bande inférieure (px)|Höhe des unteren Bands (px)
+Header|Testo intestazione (vuoto per nascondere)|Texte de l’en-tête (vide pour masquer)|Kopfzeilentext (leer zum Ausblenden)
+HeaderColor|Colore / opacità testo intestazione|Couleur / opacité du texte de l’en-tête|Textfarbe / Deckkraft der Kopfzeile
+HeaderBackground|Sfondo / opacità intestazione|Fond / opacité de l’en-tête|Hintergrund / Deckkraft der Kopfzeile
+Font|Carattere|Police|Schriftart
+NowWidth|Larghezza fissa testo Now Playing (px)|Largeur fixe du texte Now Playing (px)|Feste Breite des Now-Playing-Texts (px)
+Upper|Banda superiore — testo manuale|Bande supérieure — texte manuel|Oberes Band — manueller Text
+Lower|Banda inferiore — messaggio personalizzato 1|Bande inférieure — message personnalisé 1|Unteres Band — benutzerdefinierte Nachricht 1
+TextColor|Colore / opacità testo superiore|Couleur / opacité du texte supérieur|Textfarbe / Deckkraft des oberen Bands
+LowerTextColor|Colore / opacità testo inferiore e sottotitolo|Couleur / opacité du texte inférieur et du sous-titre|Textfarbe / Deckkraft des unteren Bands und Untertitels
+UpperBackground|Sfondo / opacità banda superiore|Fond / opacité de la bande supérieure|Hintergrund / Deckkraft des oberen Bands
+LowerBackground|Sfondo / opacità banda inferiore|Fond / opacité de la bande inférieure|Hintergrund / Deckkraft des unteren Bands
+TwitchMissing|Twitch Core: non disponibile (richiesto gestore condiviso)|Twitch Core : indisponible (gestionnaire partagé requis)|Twitch Core: nicht verfügbar (gemeinsamer Verwalter erforderlich)
+TwitchWaiting|Twitch Core: in attesa di un canale autorizzato|Twitch Core : en attente d’un canal autorisé|Twitch Core: wartet auf einen autorisierten Kanal
+TwitchReady|Twitch Core: ricevitore raid pronto|Twitch Core : récepteur de raids prêt|Twitch Core: Raid-Empfänger bereit
+TwitchClosed|Twitch Core: connessione condivisa chiusa|Twitch Core : connexion partagée fermée|Twitch Core: gemeinsame Verbindung geschlossen
+RaidEnabled|Mostra ultima raid Twitch nella banda inferiore|Afficher le dernier raid Twitch dans la bande inférieure|Letzten Twitch-Raid im unteren Band anzeigen
+RaidInfo|Gli eventi Twitch si uniscono ai messaggi nella banda inferiore. Blocchi dinamici mostra ogni elemento separatamente.|Les événements Twitch rejoignent les messages dans la bande inférieure. Blocs dynamiques affiche chaque élément séparément.|Twitch-Ereignisse erscheinen mit den Meldungen im unteren Band. Dynamische Blöcke zeigt jeden Eintrag einzeln.
+RaidRotate|Alterna eventi Twitch e messaggi (Blocchi e Alternato)|Alterner événements Twitch et messages (Blocs et Alternance)|Twitch-Ereignisse und Meldungen abwechseln (Blöcke und Wechsel)
+TwitchFollow|Mostra ultimo follower|Afficher le dernier abonné au suivi|Letzten Follower anzeigen
+TwitchSub|Mostra ultimo abbonamento|Afficher le dernier abonnement|Letztes Abonnement anzeigen
+TwitchCheer|Mostra ultimo cheer|Afficher le dernier cheer|Letzten Cheer anzeigen
+TwitchGift|Mostra ultimo abbonamento regalato|Afficher le dernier abonnement offert|Letztes verschenktes Abonnement anzeigen
+TwitchDailySubs|Mostra abbonamenti registrati oggi|Afficher les abonnements enregistrés aujourd’hui|Heute erfasste Abonnements anzeigen
+TwitchDailyBits|Mostra bit registrati oggi|Afficher les bits enregistrés aujourd’hui|Heute erfasste Bits anzeigen
+TwitchConnect|Connetti Twitch (connessione condivisa)|Connecter Twitch (connexion partagée)|Twitch verbinden (gemeinsame Verbindung)
+TwitchDisconnect|Disconnetti Twitch per tutti i plugin NEXUS|Déconnecter Twitch pour tous les plugins NEXUS|Twitch für alle NEXUS-Plugins trennen
+TwitchSharedInfo|Una sola connessione condivisa. Connetti apre Twitch per autorizzare l’account. Disconnetti influisce su tutti i plugin NEXUS. I totali includono solo eventi registrati, secondo il giorno locale di Windows.|Une connexion partagée unique. Connecter ouvre Twitch pour autoriser votre compte. Déconnecter affecte tous les plugins NEXUS. Les totaux incluent uniquement les événements enregistrés, selon le jour local de Windows.|Eine gemeinsame Verbindung. Verbinden öffnet Twitch zur Kontoautorisierung. Trennen betrifft alle NEXUS-Plugins. Summen enthalten nur erfasste Ereignisse gemäß dem lokalen Windows-Tag.
+TwitchUpgradeInfo|Eventi estesi e connessione dal ticker richiedono Twitch Core 1.3.1 o successivo. L’installazione include una versione compatibile.|Les événements étendus et la connexion depuis le ticker nécessitent Twitch Core 1.3.1 ou ultérieur. L’installateur inclut une version compatible.|Erweiterte Ereignisse und die Verbindung über den Ticker erfordern Twitch Core ab 1.2.0. Der Installer enthält eine kompatible Version.
+MapEnabled|Mostra mappa nel design News Channel|Afficher la carte dans le modèle News Channel|Karte im News-Channel-Design anzeigen
+MapAnimated|Animazione leggera della mappa|Animation discrète de la carte|Dezente Kartenanimation
+MapSpeed|Velocità animazione mappa (%)|Vitesse d’animation de la carte (%)|Geschwindigkeit der Kartenanimation (%)
+StyleLight|Light Style — design chiaro|Light Style — modèle clair|Light Style — helles Design
+StyleGroup|Gruppo di stili|Groupe de styles|Stilgruppe
+GroupNormal|Normale|Normal|Normal
+GroupCompact|Compatto|Compact|Kompakt
+MapIntensity|Intensità animazione mappa (%)|Intensité d’animation de la carte (%)|Intensität der Kartenanimation (%)
+WeatherText|Testo meteo manuale (vuoto per nascondere)|Texte météo manuel (vide pour masquer)|Manueller Wettertext (leer zum Ausblenden)
+ApplyReference|Applica layout di riferimento|Appliquer la disposition de référence|Referenzlayout anwenden
+ReferenceInfo|Imposta dimensioni, carattere, colori e movimento secondo il riferimento. Conserva testi e connessioni.|Règle dimensions, police, couleurs et mouvement selon la référence. Conserve vos textes et connexions.|Stellt Größe, Schrift, Farben und Bewegung gemäß Referenz ein. Texte und Verbindungen bleiben erhalten.
+UpperPlaying|OBS Playing — automatico|OBS Playing — automatique|OBS Playing — automatisch
+NowProviderUnsupported|OBS Playing richiede l’aggiornamento del collegamento Now Playing|OBS Playing nécessite la mise à jour de la liaison Now Playing|OBS Playing benötigt das Update der Now-Playing-Anbindung
+NowProviderAmbiguous|Più fonti OBS Playing trovate; mantienine una per la connessione automatica|Plusieurs sources OBS Playing détectées ; n’en conserver qu’une pour la connexion automatique|Mehrere OBS-Playing-Quellen gefunden; für die automatische Verbindung nur eine behalten
+WeatherMode|Meteo|Météo|Wetter
+WeatherManual|Testo manuale|Texte manuel|Manueller Text
+WeatherAuto|Open-Meteo gratuito (uso non commerciale)|Open-Meteo gratuit (usage non commercial)|Kostenloses Open-Meteo (nicht kommerziell)
+WeatherCity|Città e paese (esempio: Madrid, Spain)|Ville et pays (exemple : Madrid, Spain)|Stadt und Land (Beispiel: Madrid, Spain)
+WeatherWaiting|Meteo: in attesa di città o dati|Météo : en attente d’une ville ou de données|Wetter: wartet auf Stadt oder Daten
+WeatherReady|Meteo: dati attuali disponibili|Météo : données actuelles disponibles|Wetter: aktuelle Daten verfügbar
+WeatherLocation|Meteo: città non trovata o non valida|Météo : ville introuvable ou invalide|Wetter: Stadt nicht gefunden oder ungültig
+WeatherNetwork|Meteo: connessione fallita; nuovo tentativo previsto|Météo : échec de connexion ; nouvelle tentative prévue|Wetter: Verbindung fehlgeschlagen; erneuter Versuch geplant
+WeatherInvalid|Meteo: risposta non valida|Météo : réponse invalide|Wetter: ungültige Antwort
+WeatherStale|Meteo: dati scaduti nascosti|Météo : données périmées masquées|Wetter: veraltete Daten ausgeblendet
+WeatherInfo|Dati di <a href=\"https://open-meteo.com/\">Open-Meteo</a>, CC BY 4.0. Uso gratuito non commerciale. Le 24 capitali usano posizioni verificate. Le altre città vengono inviate al fornitore: viene scelta la prima corrispondenza; controlla il paese mostrato. Aggiornamento ogni 10 minuti. Includi Weather data by Open-Meteo, https://open-meteo.com/ (CC BY 4.0), nella descrizione pubblica della diretta o nei crediti visibili.|Données de <a href=\"https://open-meteo.com/\">Open-Meteo</a>, CC BY 4.0. Usage gratuit non commercial. Les 24 capitales utilisent des lieux vérifiés. Les autres villes sont envoyées au fournisseur : premier résultat retenu ; vérifiez le pays affiché. Mise à jour toutes les 10 minutes. Ajoutez Weather data by Open-Meteo, https://open-meteo.com/ (CC BY 4.0), dans la description publique du direct ou les crédits visibles.|Daten von <a href=\"https://open-meteo.com/\">Open-Meteo</a>, CC BY 4.0. Kostenlos für nicht kommerzielle Nutzung. Die 24 Hauptstädte verwenden geprüfte Orte. Andere Städte werden an den Anbieter gesendet: erster Treffer; angezeigtes Land prüfen. Aktualisierung alle 10 Minuten. Weather data by Open-Meteo, https://open-meteo.com/ (CC BY 4.0), in der öffentlichen Streambeschreibung oder sichtbaren Quellenangabe ergänzen.
+WeatherRotate|Alterna città World Weather|Faire défiler les villes World Weather|World-Weather-Städte wechseln
+WeatherInterval|Durata per città (secondi)|Durée par ville (secondes)|Dauer je Stadt (Sekunden)
+WeatherLocations|Città World Weather (massimo 64, elenco ordinabile)|Villes World Weather (64 maximum, liste réorganisable)|World-Weather-Städte (maximal 64, sortierbare Liste)
+WeatherCapitals|Carica le 24 capitali predefinite|Charger les 24 capitales par défaut|Die 24 Standardhauptstädte laden
+NowMotion|Movimento testo Now Playing|Mouvement du texte Now Playing|Bewegung des Now-Playing-Texts
+NowFixed|Fisso|Fixe|Fest
+NowPingPong|Ping-pong (solo titoli troppo lunghi)|Aller-retour (titres trop longs uniquement)|Pingpong (nur bei zu langen Titeln)
+NowSpeed|Velocità Now Playing (px/s)|Vitesse Now Playing (px/s)|Now-Playing-Geschwindigkeit (px/s)
+NowPause|Pausa a ogni estremità (ms)|Pause à chaque extrémité (ms)|Pause an jedem Ende (ms)
+InfoAlignRight|Allinea orologio e meteo al bordo destro|Aligner l’horloge et la météo au bord droit|Uhr und Wetter am rechten Rand ausrichten
+WeatherWidth|Larghezza riservata al meteo (px)|Largeur réservée à la météo (px)|Reservierte Wetterbreite (px)
+RefreshStatus|Aggiorna stato|Actualiser l’état|Status aktualisieren
+StatusHint|Usa Aggiorna stato per controllare connessione e dati attuali.|Utilisez Actualiser l’état pour vérifier la connexion et les données actuelles.|Status aktualisieren verwenden, um aktuelle Verbindung und Daten zu prüfen.
+SectionDesign|Design e dimensioni|Style et dimensions|Design und Größe
+SectionHeader|Intestazione|En-tête|Kopfzeile
+SectionNow|Now Playing — musica|Now Playing — musique|Now Playing — Musik
+SectionNews|Notizie — banda inferiore|Actualités — bande inférieure|Nachrichten — unteres Band
+SectionClock|Orologio|Horloge|Uhr
+SectionWeather|World Weather|World Weather|World Weather
+SectionMap|Mappa e animazione|Carte et animation|Karte und Animation
+SectionAppearance|Carattere e colori|Police et couleurs|Schrift und Farben
+SectionTwitch|Twitch — connessione ed eventi|Twitch — connexion et événements|Twitch — Verbindung und Ereignisse
+SectionHype|Breaking News — Hype Train|Breaking News — Hype Train|Breaking News — Hype Train
+HypeEnabled|Mostra Breaking News di Hype Train|Afficher les Breaking News Hype Train|Hype-Train-Breaking-News anzeigen
+HypeWidth|Larghezza banda (px; 0 = automatica 65%)|Largeur de la bande (px ; 0 = automatique 65 %)|Bandbreite (px; 0 = automatisch 65 %)
+HypeHeight|Altezza banda (px)|Hauteur de la bande (px)|Bandhöhe (px)
+HypeBlink|Fai lampeggiare WE HAVE A HYPE TRAIN|Faire clignoter WE HAVE A HYPE TRAIN|WE HAVE A HYPE TRAIN blinken lassen
+HypePreview|Anteprima di prova (dati fittizi; visibile in uscita)|Aperçu de test (données fictives ; visible en sortie)|Testvorschau (fiktive Daten; im Ausgang sichtbar)
+HypeCustom|Usa colori personalizzati per la banda|Utiliser des couleurs personnalisées pour la bande|Eigene Bandfarben verwenden
+HypeColor|Colore / opacità testo banda|Couleur / opacité du texte de la bande|Textfarbe / Deckkraft des Bands
+HypeBackground|Sfondo / opacità banda|Fond / opacité de la bande|Hintergrund / Deckkraft des Bands
+HypeAccent|Colore / opacità accento banda|Couleur / opacité de l’accent de la bande|Akzentfarbe / Deckkraft des Bands
+HypeInfo|Twitch Core 1.3.1 fornisce livello, avanzamento e scadenza reali. Richiede channel:read:hype_train. Lo spazio sopra il ticker resta riservato quando attivo, anche senza un treno. L’anteprima usa dati fittizi.|Twitch Core 1.3.1 fournit le niveau, la progression et l’expiration réels. Autorisation channel:read:hype_train requise. L’espace reste réservé au-dessus du ticker quand activé, même sans train. L’aperçu utilise des données fictives.|Twitch Core 1.3.1 liefert echte Stufe, Fortschritt und Ablaufzeit. Berechtigung channel:read:hype_train erforderlich. Bei Aktivierung bleibt der Platz über dem Ticker reserviert, auch ohne Zug. Die Vorschau verwendet fiktive Daten.
+HypeBlinkSpeed|Durata ciclo lampeggio (ms; meno = più veloce)|Durée du cycle de clignotement (ms ; moins = plus rapide)|Blinkzyklusdauer (ms; kürzer = schneller)

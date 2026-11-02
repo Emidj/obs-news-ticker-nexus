@@ -1,0 +1,223 @@
+{
+  "source": "https://open-meteo.com/en/docs/geocoding-api",
+  "license": "CC BY 4.0; location data based on GeoNames",
+  "verified": "2026-10-25",
+  "capitals": [
+    {
+      "name": "Madrid",
+      "selection": "Madrid (ES)",
+      "query": "Madrid, Spain",
+      "country": "ES",
+      "geonames_id": 3117735,
+      "latitude": 40.4165,
+      "longitude": -3.70256
+    },
+    {
+      "name": "Londres",
+      "selection": "Londres (GB)",
+      "query": "London, United Kingdom",
+      "country": "GB",
+      "geonames_id": 2643743,
+      "latitude": 51.50853,
+      "longitude": -0.12574
+    },
+    {
+      "name": "París",
+      "selection": "París (FR)",
+      "query": "Paris, France",
+      "country": "FR",
+      "geonames_id": 2988507,
+      "latitude": 48.85341,
+      "longitude": 2.3488
+    },
+    {
+      "name": "Roma",
+      "selection": "Roma (IT)",
+      "query": "Rome, Italy",
+      "country": "IT",
+      "geonames_id": 3169070,
+      "latitude": 41.89193,
+      "longitude": 12.51133
+    },
+    {
+      "name": "Tokio",
+      "selection": "Tokio (JP)",
+      "query": "Tokyo, Japan",
+      "country": "JP",
+      "geonames_id": 1850147,
+      "latitude": 35.6895,
+      "longitude": 139.69171
+    },
+    {
+      "name": "Nueva Delhi",
+      "selection": "Nueva Delhi (IN)",
+      "query": "New Delhi, India",
+      "country": "IN",
+      "geonames_id": 1261481,
+      "latitude": 28.62137,
+      "longitude": 77.2148
+    },
+    {
+      "name": "Washington D. C.",
+      "selection": "Washington D. C. (US)",
+      "query": "Washington, United States",
+      "country": "US",
+      "geonames_id": 4140963,
+      "latitude": 38.89511,
+      "longitude": -77.03637
+    },
+    {
+      "name": "Abu Dabi",
+      "selection": "Abu Dabi (AE)",
+      "query": "Abu Dhabi, United Arab Emirates",
+      "country": "AE",
+      "geonames_id": 292968,
+      "latitude": 24.45118,
+      "longitude": 54.39696
+    },
+    {
+      "name": "Seúl",
+      "selection": "Seúl (KR)",
+      "query": "Seoul, South Korea",
+      "country": "KR",
+      "geonames_id": 1835848,
+      "latitude": 37.566,
+      "longitude": 126.9784
+    },
+    {
+      "name": "Pekín",
+      "selection": "Pekín (CN)",
+      "query": "Beijing, China",
+      "country": "CN",
+      "geonames_id": 1816670,
+      "latitude": 39.9075,
+      "longitude": 116.39723
+    },
+    {
+      "name": "Buenos Aires",
+      "selection": "Buenos Aires (AR)",
+      "query": "Buenos Aires, Argentina",
+      "country": "AR",
+      "geonames_id": 3435910,
+      "latitude": -34.61315,
+      "longitude": -58.37723
+    },
+    {
+      "name": "Bogotá",
+      "selection": "Bogotá (CO)",
+      "query": "Bogota, Colombia",
+      "country": "CO",
+      "geonames_id": 3688689,
+      "latitude": 4.60971,
+      "longitude": -74.08175
+    },
+    {
+      "name": "Santiago de Chile",
+      "selection": "Santiago de Chile (CL)",
+      "query": "Santiago, Chile",
+      "country": "CL",
+      "geonames_id": 3871336,
+      "latitude": -33.45694,
+      "longitude": -70.64827
+    },
+    {
+      "name": "Brasilia",
+      "selection": "Brasilia (BR)",
+      "query": "Brasilia, Brazil",
+      "country": "BR",
+      "geonames_id": 3469058,
+      "latitude": -15.77972,
+      "longitude": -47.92972
+    },
+    {
+      "name": "Ciudad de México",
+      "selection": "Ciudad de México (MX)",
+      "query": "Mexico City, Mexico",
+      "country": "MX",
+      "geonames_id": 3530597,
+      "latitude": 19.42847,
+      "longitude": -99.12766
+    },
+    {
+      "name": "Ottawa",
+      "selection": "Ottawa (CA)",
+      "query": "Ottawa, Canada",
+      "country": "CA",
+      "geonames_id": 6094817,
+      "latitude": 45.41117,
+      "longitude": -75.69812
+    },
+    {
+      "name": "Berlín",
+      "selection": "Berlín (DE)",
+      "query": "Berlin, Germany",
+      "country": "DE",
+      "geonames_id": 2950159,
+      "latitude": 52.52437,
+      "longitude": 13.41053
+    },
+    {
+      "name": "Ámsterdam",
+      "selection": "Ámsterdam (NL)",
+      "query": "Amsterdam, Netherlands",
+      "country": "NL",
+      "geonames_id": 2759794,
+      "latitude": 52.37403,
+      "longitude": 4.88969
+    },
+    {
+      "name": "Bruselas",
+      "selection": "Bruselas (BE)",
+      "query": "Brussels, Belgium",
+      "country": "BE",
+      "geonames_id": 2800866,
+      "latitude": 50.85045,
+      "longitude": 4.34878
+    },
+    {
+      "name": "Varsovia",
+      "selection": "Varsovia (PL)",
+      "query": "Warsaw, Poland",
+      "country": "PL",
+      "geonames_id": 756135,
+      "latitude": 52.22977,
+      "longitude": 21.01178
+    },
+    {
+      "name": "Lisboa",
+      "selection": "Lisboa (PT)",
+      "query": "Lisbon, Portugal",
+      "country": "PT",
+      "geonames_id": 2267057,
+      "latitude": 38.72509,
+      "longitude": -9.1498
+    },
+    {
+      "name": "Viena",
+      "selection": "Viena (AT)",
+      "query": "Vienna, Austria",
+      "country": "AT",
+      "geonames_id": 2761369,
+      "latitude": 48.20849,
+      "longitude": 16.37208
+    },
+    {
+      "name": "Atenas",
+      "selection": "Atenas (GR)",
+      "query": "Athens, Greece",
+      "country": "GR",
+      "geonames_id": 264371,
+      "latitude": 37.98376,
+      "longitude": 23.72784
+    },
+    {
+      "name": "Estocolmo",
+      "selection": "Estocolmo (SE)",
+      "query": "Stockholm, Sweden",
+      "country": "SE",
+      "geonames_id": 2673730,
+      "latitude": 59.32938,
+      "longitude": 18.06871
+    }
+  ]
+}

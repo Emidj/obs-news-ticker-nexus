@@ -1,0 +1,9 @@
+{
+  "source": "playing-next/src/obs/source.cpp",
+  "SHA256": "d9e60608f754dbd576f9f93035f730abaf9d09451f949c1c9616b5ad7098ddc3",
+  "applied": true,
+  "updated_SHA256": "572016573ae6200a5f6c888bf443c38ee96e3f3e5eae49e6df86c9825792bbdb",
+  "publisher_SHA256": "54303328f7e6efff4d4b51937392b4db37f9b2d5ac7f84b50c3f91de9b777d11",
+  "portable_OBS_checks": 7,
+  "portable_OBS_failures": 0
+}

@@ -1,0 +1,4 @@
+#include <windows.h>
+NEXUS_TWITCH_CONTRACT RCDATA "shared/ticker-contract.json"
+
+#include "../build/ticker-version.rc"
