@@ -10,9 +10,9 @@ Native ticker source for OBS Studio on Windows x64. First stable release, with 1
 
 *Actual renderer output from a controlled development demonstration: header, Now Playing, clock/weather and lower event/news band. Sample tracks and event data are not evidence of a live broadcast.*
 
-![Hype Train band across the styles](docs/images/hype-train-styles.png)
+![Complete ticker in the Light style](docs/images/ticker-light.png)
 
-*Actual native-renderer Hype Train preview with controlled level/progress/countdown data. This is a test demonstration, not a real Twitch event.*
+*Complete ticker in the Light style: Now Playing, weather, custom header and lower Twitch event/message band. Actual renderer output with controlled sample data; not a live event capture.*
 
 ## Install
 
@@ -34,10 +34,6 @@ Updating preserves scenes, source settings and Twitch credentials. To uninstall,
 - Fixed clock/weather regions, with weather before the outer clock when aligned right.
 - Automatic World Weather with 24 default capitals, editable ordered city list and city-change fades.
 - Optional short Hype Train Breaking News band above every style: adjustable width/height/colors, configurable message blink, real level/progress/countdown and explicit test previews.
-
-![English Windows installer](docs/images/installer-en.png)
-
-*Preview rendered from the actual installer form; standard installation should be performed with OBS closed.*
 
 ## Playing NEXUS
 
